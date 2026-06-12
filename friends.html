@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friends | Nursyahira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    color:#45363d;
+    overflow-x:hidden;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 12% 20%,rgba(255,255,255,.70),transparent 25%),
+        radial-gradient(circle at 88% 18%,rgba(255,196,215,.55),transparent 26%),
+        radial-gradient(circle at 15% 90%,rgba(255,219,169,.50),transparent 28%),
+        radial-gradient(circle at 88% 88%,rgba(177,238,229,.45),transparent 30%),
+        linear-gradient(135deg,#ffd6e7,#ffe2c8,#fff0d6,#d8fff7,#f5d8ff);
+}
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    z-index:3000;
+    padding:0 42px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(16px);
+    box-shadow:0 8px 26px rgba(0,0,0,.08);
+}
+
+nav a{
+    text-decoration:none;
+    color:#3d3337;
+    margin-left:28px;
+    font-family:'Playfair Display',serif;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s;
+}
+
+nav a:hover,
+nav a.active{
+    color:#e95f95;
+}
+
+.music-btn{
+    position:fixed;
+    top:82px;
+    right:16px;
+    width:56px;
+    height:56px;
+    z-index:4000;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:23px;
+    color:#7b2b52;
+    background:linear-gradient(135deg,#ff78ad,#ffd166);
+    box-shadow:0 14px 34px rgba(0,0,0,.20);
+    animation:musicFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes musicFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-7px);}
+}
+.hero{
+    min-height:360px;
+    padding:115px 7% 50px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(45deg,rgba(255,255,255,.22) 25%,transparent 25%),
+        linear-gradient(-45deg,rgba(255,255,255,.18) 25%,transparent 25%);
+    background-size:60px 60px;
+    opacity:.35;
+    animation:bgMove 18s linear infinite;
+}
+
+@keyframes bgMove{
+    from{background-position:0 0;}
+    to{background-position:140px 140px;}
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-family:'Great Vibes',cursive;
+    font-size:92px;
+    color:#df5d92;
+    text-shadow:0 5px 18px rgba(255,255,255,.85);
+    line-height:1;
+}
+
+.hero .heart{
+    font-size:70px;
+    vertical-align:middle;
+    filter:drop-shadow(0 8px 10px rgba(223,93,146,.25));
+}
+
+.hero p{
+    max-width:760px;
+    margin:26px auto 0;
+    line-height:1.8;
+    color:#4f4047;
+    font-size:18px;
+    font-weight:700;
+}
+
+.float{
+    position:absolute;
+    font-size:34px;
+    z-index:1;
+    opacity:.8;
+    animation:floatIcon 6s ease-in-out infinite;
+}
+
+.f1{top:120px;left:8%;}
+.f2{top:185px;right:9%;animation-delay:1.5s;}
+.f3{bottom:40px;left:16%;animation-delay:3s;}
+.f4{bottom:60px;right:17%;animation-delay:2.2s;}
+
+@keyframes floatIcon{
+    0%,100%{transform:translateY(0) rotate(0);}
+    50%{transform:translateY(-18px) rotate(7deg);}
+}
+
+.main{
+    padding:0 6.5% 70px;
+}
+
+.friend-wrapper{
+    max-width:1180px;
+    margin:auto;
+    padding:54px 38px;
+    border-radius:40px;
+    background:rgba(255,255,255,.76);
+    backdrop-filter:blur(18px);
+    border:2px solid rgba(255,255,255,.9);
+    box-shadow:0 26px 70px rgba(214,105,135,.20);
+    position:relative;
+}
+
+.friend-wrapper::before{
+    content:"";
+    position:absolute;
+    inset:16px;
+    border:2px dashed rgba(255,128,171,.42);
+    border-radius:32px;
+    pointer-events:none;
+}
+
+.section-title{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.section-title h2{
+    font-family:'Playfair Display',serif;
+    font-size:45px;
+    color:#df5d92;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    max-width:760px;
+    margin:auto;
+    color:#5f5559;
+    line-height:1.8;
+    font-size:15.5px;
+    font-weight:600;
+}
+
+/* FRIEND PHOTO SECTION */
+.friend-photo-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    margin-bottom:42px;
+}
+
+.friend-photo-card{
+    padding:12px;
+    border-radius:30px;
+    background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,239,229,.82));
+    border:2px solid rgba(255,255,255,.95);
+    box-shadow:0 20px 45px rgba(214,105,135,.16);
+    transition:.35s;
+    opacity:0;
+    transform:translateY(35px);
+}
+
+.friend-photo-card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.friend-photo-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 26px 55px rgba(214,105,135,.24);
+}
+
+.friend-photo-card img{
+    width:100%;
+    height:245px;
+    object-fit:cover;
+    object-position:center;
+    border-radius:22px;
+    display:block;
+}
+
+.friend-photo-card p{
+    text-align:center;
+    margin-top:12px;
+    color:#df5d92;
+    font-weight:800;
+    font-size:14px;
+}
+
+/* FRIEND CARDS */
+.friend-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+}
+
+.friend-card{
+    min-height:315px;
+    padding:32px 24px;
+    border-radius:34px;
+    background:
+        radial-gradient(circle at top left,rgba(255,255,255,.95),transparent 36%),
+        linear-gradient(145deg,rgba(255,248,250,.96),rgba(255,238,230,.92));
+    border:2px solid rgba(255,255,255,.95);
+    box-shadow:0 20px 42px rgba(214,105,135,.14);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    transition:.4s;
+    opacity:0;
+    transform:translateY(35px);
+}
+
+.friend-card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.friend-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 28px 55px rgba(214,105,135,.22);
+}
+
+.friend-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.75),transparent);
+    transition:.7s;
+}
+
+.friend-card:hover::before{
+    left:100%;
+}
+
+.tape{
+    width:92px;
+    height:25px;
+    border-radius:5px;
+    background:#ff9fc1;
+    position:absolute;
+    top:16px;
+    left:50%;
+    transform:translateX(-50%) rotate(-4deg);
+    opacity:.85;
+}
+
+.friend-icon{
+    width:105px;
+    height:105px;
+    margin:35px auto 20px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 35% 25%,rgba(255,255,255,.9),transparent 28%),
+        linear-gradient(135deg,#ff79aa,#ffd166,#ffc3a0);
+    border:6px solid white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    box-shadow:0 14px 32px rgba(223,93,146,.22);
+}
+
+.friend-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:27px;
+    color:#df5d92;
+    margin-bottom:10px;
+}
+
+.friend-card p{
+    color:#5b5054;
+    line-height:1.8;
+    font-size:14.5px;
+    font-weight:600;
+}
+
+.love{
+    position:absolute;
+    top:30px;
+    right:26px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ff8fb3;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    box-shadow:0 10px 24px rgba(255,143,179,.35);
+}
+
+/* QUOTE */
+.quote-section{
+    max-width:900px;
+    margin:55px auto 0;
+    padding:35px;
+    text-align:center;
+    border-radius:34px;
+    background:rgba(255,255,255,.78);
+    border:2px solid rgba(255,255,255,.9);
+    box-shadow:0 18px 40px rgba(214,105,135,.14);
+    position:relative;
+    z-index:2;
+}
+
+.quote-section h2{
+    font-family:'Great Vibes',cursive;
+    font-size:52px;
+    color:#df5d92;
+    margin-bottom:12px;
+}
+
+.quote-section p{
+    color:#5f5559;
+    line-height:1.9;
+    font-size:15px;
+    font-weight:600;
+}
+
+/* BUTTONS */
+.button-area{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    position:relative;
+    z-index:2;
+}
+
+.btn{
+    padding:13px 30px;
+    border-radius:40px;
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    font-weight:800;
+    background:linear-gradient(135deg,#df5d92,#ff91b5,#ffd166);
+    box-shadow:0 12px 26px rgba(223,93,146,.22);
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-6px);
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    background:linear-gradient(135deg,#df5d92,#ff91b5,#ffc3a0,#ffd166);
+}
+
+@media(max-width:950px){
+    header{
+        height:auto;
+        padding:14px 20px;
+        justify-content:center;
+    }
+
+    nav{
+        text-align:center;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:6px 10px;
+        font-size:13px;
+    }
+
+    .hero{
+        padding-top:155px;
+    }
+
+    .hero h1{
+        font-size:70px;
+    }
+
+    .hero .heart{
+        font-size:55px;
+    }
+
+    .friend-grid,
+    .friend-photo-grid{
+        grid-template-columns:1fr;
+    }
+
+    .friend-photo-card img{
+        height:320px;
+    }
+
+    .section-title h2{
+        font-size:36px;
+    }
+}
+
+@media(max-width:520px){
+    .hero h1{
+        font-size:56px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .friend-wrapper{
+        padding:38px 22px;
+        border-radius:30px;
+    }
+
+    .friend-photo-card img{
+        height:240px;
+    }
+
+    .quote-section h2{
+        font-size:42px;
+    }
+
+    .music-btn{
+        width:50px;
+        height:50px;
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="audio/shape%20of%20my%20heart.mp3" type="audio/mpeg">
+    <source src="audio/shape of my heart.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()" id="musicBtn" title="Play Music">🎵</button>
+<header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="biodata.html">Biodata</a>
+        <a href="family.html">Family</a>
+        <a href="friends.html" class="active">Friends</a>
+        <a href="education.html">Education</a>
+        <a href="memory.html">Memory</a>
+        <a href="aboutme.html">About Me</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="float f1">🌸</div>
+    <div class="float f2">✨</div>
+    <div class="float f3">🤍</div>
+    <div class="float f4">🌷</div>
+
+    <div class="hero-content">
+        <h1>My Friends <span class="heart">💖</span></h1>
+        <p>
+            The people who make my life more meaningful, full of laughter,
+            happiness and beautiful memories every day ✨
+        </p>
+    </div>
+</section>
+
+<section class="main">
+    <div class="friend-wrapper">
+
+        <div class="section-title">
+            <h2>💗 My Precious Friends</h2>
+            <p>
+                Friends are the people who make every moment brighter.
+                They bring happiness, support and unforgettable memories
+                that I will always keep in my heart.
+            </p>
+        </div>
+
+        <div class="friend-photo-grid">
+            <div class="friend-photo-card">
+                <img src="image/friends1.jpg" alt="Friend Photo 1">
+                <p>Sweet Moment ♡</p>
+            </div>
+
+            <div class="friend-photo-card">
+                <img src="image/friends2.jpg" alt="Friend Photo 2">
+                <p>Best Memories ✨</p>
+            </div>
+
+            <div class="friend-photo-card">
+                <img src="image/friends3.jpg" alt="Friend Photo 3">
+                <p>Happy Together 💗</p>
+            </div>
+
+            <div class="friend-photo-card">
+                <img src="image/friends4.jpg" alt="Friend Photo 4">
+                <p>Forever Friends 🌷</p>
+            </div>
+
+            <div class="friend-photo-card">
+                <img src="image/friends5.jpg" alt="Friend Photo 5">
+                <p>Good Vibes 🦋</p>
+            </div>
+
+            <div class="friend-photo-card">
+                <img src="image/friends6.jpg" alt="Friend Photo 6">
+                <p>Precious Memory 🤍</p>
+            </div>
+        </div>
+
+        <div class="friend-grid">
+
+            <div class="friend-card">
+                <div class="tape"></div>
+                <div class="love">♡</div>
+                <div class="friend-icon">👭</div>
+                <h3>Best Friends</h3>
+                <p>
+                    Friends who always stay by my side, support me and make
+                    ordinary days become special memories.
+                </p>
+            </div>
+
+            <div class="friend-card">
+                <div class="tape"></div>
+                <div class="love">♡</div>
+                <div class="friend-icon">🌷</div>
+                <h3>Sweet Moments</h3>
+                <p>
+                    Every laugh, story and small moment together becomes
+                    something precious that I will always remember.
+                </p>
+            </div>
+
+            <div class="friend-card">
+                <div class="tape"></div>
+                <div class="love">♡</div>
+                <div class="friend-icon">✨</div>
+                <h3>Happy Memories</h3>
+                <p>
+                    Beautiful memories with friends are like little stars
+                    that shine in my life forever.
+                </p>
+            </div>
+
+            <div class="friend-card">
+                <div class="tape"></div>
+                <div class="love">♡</div>
+                <div class="friend-icon">💌</div>
+                <h3>Always Together</h3>
+                <p>
+                    True friends are not only there during happy times,
+                    but also during difficult moments.
+                </p>
+            </div>
+
+            <div class="friend-card">
+                <div class="tape"></div>
+                <div class="love">♡</div>
+                <div class="friend-icon">🦋</div>
+                <h3>Good Vibes</h3>
+                <p>
+                    My friends always bring positive energy, comfort and
+                    cheerful vibes into my life.
+                </p>
+            </div>
+
+            <div class="friend-card">
+                <div class="tape"></div>
+                <div class="love">♡</div>
+                <div class="friend-icon">🤍</div>
+                <h3>Forever Cherished</h3>
+                <p>
+                    I am thankful for every friendship, every memory and every
+                    beautiful moment we shared together.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="quote-section">
+            <h2>Friendship is a Beautiful Gift</h2>
+            <p>
+                A true friend is someone who makes you smile, listens to your stories,
+                supports your dreams and stays with you through every chapter of life.
+            </p>
+        </div>
+
+        </section>
+
+<footer>
+    © 2026 Nursyahira Binti Zakaria | Friends Page ♡
+</footer>
+
+<script>
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic(){
+    if(music.paused){
+        music.play().then(function(){
+            musicBtn.innerHTML = "⏸️";
+            musicBtn.title = "Pause Music";
+        }).catch(function(){
+            musicBtn.innerHTML = "🎵";
+            alert("Lagu tak jumpa. Pastikan file ada dalam GitHub: audio/music.mp3");
+        });
+    }else{
+        music.pause();
+        musicBtn.innerHTML = "🎵";
+        musicBtn.title = "Play Music";
+    }
+}
+
+const cards = document.querySelectorAll(".friend-card, .friend-photo-card");
+
+function revealCards(){
+    cards.forEach(function(card){
+        const cardTop = card.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if(cardTop < windowHeight - 80){
+            card.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll",revealCards);
+window.addEventListener("load",revealCards);
+revealCards();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me | Nursyahira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    color:#4b303b;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(255,196,214,.72),transparent 30%),
+        radial-gradient(circle at 85% 15%,rgba(255,220,155,.70),transparent 33%),
+        radial-gradient(circle at 50% 88%,rgba(255,168,139,.55),transparent 35%),
+        linear-gradient(135deg,#fff1df,#ffd6df,#ffc8b4,#fff4cb);
+    background-size:220% 220%;
+    animation:bgMove 15s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.48) 1px,transparent 1px),
+        radial-gradient(circle,rgba(255,183,205,.35) 1.5px,transparent 1.5px);
+    background-size:38px 38px,72px 72px;
+    opacity:.58;
+}
+
+.loader{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#ffd6e7,#ffe8ba,#ffc7b0,#fff1df);
+    transition:.7s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-box{
+    text-align:center;
+    padding:35px 45px;
+    border-radius:35px;
+    background:rgba(255,255,255,.52);
+    border:1px solid rgba(255,255,255,.85);
+    box-shadow:0 25px 60px rgba(168,83,103,.25);
+    backdrop-filter:blur(14px);
+}
+
+.loader-box h2{
+    font-family:'Great Vibes',cursive;
+    font-size:3.2rem;
+    color:#9b405e;
+    margin-bottom:8px;
+}
+
+.loader-box p{
+    color:#7b4b55;
+    font-weight:600;
+}
+
+.loading-dots span{
+    display:inline-block;
+    width:9px;
+    height:9px;
+    margin:18px 4px 0;
+    border-radius:50%;
+    background:#b94b70;
+    animation:bounce 1s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.loading-dots span:nth-child(3){
+    animation-delay:.4s;
+}
+
+@keyframes bounce{
+    0%,80%,100%{
+        transform:scale(0);
+    }
+
+    40%{
+        transform:scale(1);
+    }
+}
+.progress-bar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:5px;
+    z-index:1000;
+    background:linear-gradient(90deg,#b94b70,#ffad76,#ffe08a);
+}
+
+.navbar{
+    position:fixed;
+    top:22px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(94%,1080px);
+    z-index:999;
+    padding:14px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    border-radius:50px;
+    background:rgba(255,255,255,.50);
+    border:1px solid rgba(255,255,255,.85);
+    box-shadow:0 18px 45px rgba(136,69,89,.18);
+    backdrop-filter:blur(16px);
+}
+
+.logo{
+    font-family:'Great Vibes',cursive;
+    font-size:1.9rem;
+    color:#9b405e;
+    white-space:nowrap;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#633645;
+    font-size:.84rem;
+    font-weight:600;
+    padding:8px 13px;
+    border-radius:30px;
+    transition:.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    background:linear-gradient(135deg,#b94b70,#ffad76);
+    color:white;
+    box-shadow:0 10px 22px rgba(185,75,112,.25);
+}
+.music-btn{
+    position:fixed !important;
+    top:auto !important;
+    bottom:18px !important;
+    right:18px !important;
+    width:38px !important;
+    height:38px !important;
+    z-index:9999 !important;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:16px !important;
+    background:linear-gradient(135deg,#ff7eb3,#ffd166);
+    color:#7b2b52;
+    box-shadow:0 10px 24px rgba(0,0,0,.16);
+    animation:musicFloat 2.5s ease-in-out infinite;
+}
+
+.music-btn:hover{
+    transform:scale(1.08);
+}
+
+@keyframes musicFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-6px);
+    }
+}
+
+.hero{
+    min-height:100vh;
+    padding:145px 25px 65px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-card{
+    width:min(1100px,100%);
+    text-align:center;
+    padding:50px 35px;
+    border-radius:38px;
+    background:rgba(255,255,255,.48);
+    border:1px solid rgba(255,255,255,.78);
+    box-shadow:0 25px 70px rgba(146,77,94,.24);
+    backdrop-filter:blur(18px);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-card::before{
+    content:"";
+    position:absolute;
+    width:270px;
+    height:270px;
+    border-radius:50%;
+    top:-100px;
+    left:-85px;
+    background:rgba(255,184,196,.34);
+}
+
+.hero-card::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    bottom:-120px;
+    right:-100px;
+    background:rgba(255,218,142,.36);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.small-title{
+    display:inline-block;
+    padding:9px 19px;
+    border-radius:25px;
+    background:rgba(255,255,255,.66);
+    color:#9b405e;
+    font-weight:700;
+    font-size:.9rem;
+    margin-bottom:16px;
+    box-shadow:0 10px 25px rgba(155,64,94,.14);
+}
+
+.hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.4rem,6vw,5.1rem);
+    color:#763247;
+    line-height:1.05;
+    margin-bottom:14px;
+}
+
+.hero h1 span{
+    font-family:'Great Vibes',cursive;
+    font-weight:400;
+    color:#b94b70;
+}
+
+.hero-text{
+    max-width:760px;
+    margin:0 auto 25px;
+    color:#6c4652;
+    font-size:1.02rem;
+    line-height:1.8;
+}
+
+.about-image-frame{
+    width:215px;
+    height:215px;
+    margin:8px auto 32px;
+    padding:10px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#b94b70,#ffad76,#ffe08a);
+    box-shadow:0 20px 45px rgba(146,77,94,.25);
+    position:relative;
+}
+
+.about-image-frame::before{
+    content:"🌷";
+    position:absolute;
+    top:-8px;
+    right:3px;
+    font-size:28px;
+}
+
+.about-image-frame::after{
+    content:"✨";
+    position:absolute;
+    bottom:2px;
+    left:-5px;
+    font-size:27px;
+}
+
+.about-image-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid white;
+    display:block;
+    background:white;
+}
+
+/* ABOUT BOXES */
+.about-grid{
+    width:min(1050px,100%);
+    margin:34px auto 0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.about-card{
+    min-height:205px;
+    padding:25px 22px;
+    border-radius:28px;
+    background:rgba(255,255,255,.48);
+    border:1px solid rgba(255,255,255,.82);
+    box-shadow:0 18px 42px rgba(126,62,82,.15);
+    backdrop-filter:blur(15px);
+    transition:.35s ease;
+}
+
+.about-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 24px 55px rgba(126,62,82,.22);
+}
+
+.about-icon{
+    width:58px;
+    height:58px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.6rem;
+    background:linear-gradient(135deg,#fff0c7,#ffc4d5);
+    box-shadow:0 13px 25px rgba(156,73,100,.18);
+}
+
+.about-card h3{
+    color:#8b3852;
+    margin-bottom:10px;
+    font-size:1.1rem;
+}
+
+.about-card p{
+    color:#6d4b56;
+    line-height:1.7;
+    font-size:.92rem;
+}
+
+/* VIDEO */
+.video-section{
+    padding:20px 25px 80px;
+}
+
+.video-box{
+    width:min(900px,100%);
+    margin:auto;
+    padding:28px;
+    border-radius:38px;
+    background:rgba(255,255,255,.48);
+    border:1px solid rgba(255,255,255,.82);
+    box-shadow:0 25px 65px rgba(135,66,86,.22);
+    backdrop-filter:blur(17px);
+    text-align:center;
+}
+
+.video-box h2{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,4vw,3.4rem);
+    color:#763247;
+    margin-bottom:10px;
+}
+
+.video-box p{
+    color:#73505b;
+    line-height:1.7;
+}
+
+.video-wrapper{
+    margin:26px auto 0;
+    width:min(780px,100%);
+    padding:16px;
+    border-radius:32px;
+    background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,238,218,.65));
+    border:1px solid rgba(255,255,255,.95);
+    box-shadow:
+        0 25px 60px rgba(135,66,86,.20),
+        inset 0 0 0 1px rgba(255,255,255,.5);
+}
+
+.youtube-video{
+    width:100%;
+    overflow:hidden;
+    border-radius:24px;
+    background:#fff;
+    box-shadow:0 18px 45px rgba(105,50,68,.18);
+}
+
+.youtube-video iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    display:block;
+    border:0;
+    border-radius:24px;
+}
+
+.video-caption{
+    margin-top:15px;
+    font-size:1rem;
+    font-weight:700;
+    color:#8c4057;
+    text-align:center;
+}
+
+.quote-section{
+    padding:0 25px 75px;
+}
+
+.quote-card{
+    width:min(900px,100%);
+    margin:auto;
+    padding:38px 30px;
+    border-radius:35px;
+    text-align:center;
+    background:rgba(255,255,255,.45);
+    border:1px solid rgba(255,255,255,.82);
+    box-shadow:0 20px 50px rgba(128,64,84,.17);
+    backdrop-filter:blur(16px);
+}
+
+.quote-card h2{
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(2.4rem,5vw,4rem);
+    color:#b94b70;
+    margin-bottom:10px;
+}
+
+.quote-card p{
+    color:#6d4b56;
+    line-height:1.8;
+}
+
+footer{
+    text-align:center;
+    padding:30px 20px 38px;
+    color:#704655;
+    font-weight:600;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:.8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:900px){
+    .navbar{
+        flex-direction:column;
+        border-radius:28px;
+        padding:14px;
+    }
+
+    .nav-links{
+        justify-content:center;
+    }
+
+    .hero{
+        padding-top:215px;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-card{
+        padding:38px 20px;
+    }
+}
+
+@media(max-width:480px){
+    .nav-links a{
+        font-size:.76rem;
+        padding:7px 10px;
+    }
+
+    .logo{
+        font-size:1.7rem;
+    }
+
+    .about-image-frame{
+        width:180px;
+        height:180px;
+    }
+
+    .video-box{
+        padding:20px 12px;
+        border-radius:26px;
+    }
+
+    .video-wrapper{
+        padding:10px;
+        border-radius:24px;
+    }
+
+    .youtube-video,
+    .youtube-video iframe{
+        border-radius:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+    <div class="loader-box">
+        <h2>Nursyahira</h2>
+        <p>Loading About Me Page...</p>
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="audio/shape%20of%20my%20heart.mp3" type="audio/mpeg">
+    <source src="audio/shape of my heart.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="toggleMusic()" id="musicBtn" title="Play Music">🎵</button>
+
+<nav class="navbar">
+    <div class="logo">Nursyahira</div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="biodata.html">Biodata</a>
+        <a href="family.html">Family</a>
+        <a href="friends.html">Friends</a>
+        <a href="education.html">Education</a>
+        <a href="memory.html">Memory</a>
+        <a href="aboutme.html" class="active">About Me</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-card reveal">
+        <div class="hero-content">
+            <span class="small-title">Get To Know Me ✨</span>
+
+            <h1>About <span>Me</span></h1>
+
+            <p class="hero-text">
+                Hi, my name is Nursyahira. This page shares a little bit about my favourite things,
+                my personality, and the moments that make my life more meaningful.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-card reveal">
+                    <div class="about-icon">🍽️</div>
+                    <h3>Favourite Food</h3>
+                    <p>
+                        My favourite food are chicken chop, nasi padang,
+                        and burnt cheesecake.
+                    </p>
+                </div>
+
+                <div class="about-card reveal">
+                    <div class="about-icon">🍵</div>
+                    <h3>Favourite Drinks</h3>
+                    <p>
+                        I love matcha latte and lemon lime tea because both taste
+                        refreshing and make me feel happy.
+                    </p>
+                </div>
+
+                <div class="about-card reveal">
+                    <div class="about-icon">🎬</div>
+                    <h3>Favourite Movie</h3>
+                    <p>
+                        I enjoy watching movies that are meaningful, emotional,
+                        and have beautiful stories.
+                    </p>
+                </div>
+
+                <div class="about-card reveal">
+                    <div class="about-icon">🥋</div>
+                    <h3>Favourite Sport</h3>
+                    <p>
+                        I like taekwondo because it teaches discipline,
+                        confidence, and strength.
+                    </p>
+                </div>
+
+                <div class="about-card reveal">
+                    <div class="about-icon">🏕️</div>
+                    <h3>Extreme Sports</h3>
+                    <p>
+                        I also like extreme sports because they are exciting,
+                        challenging, and full of adventure.
+                    </p>
+                </div>
+
+                <div class="about-card reveal">
+                    <div class="about-icon">💗</div>
+                    <h3>My Personality</h3>
+                    <p>
+                        I am someone who loves beautiful memories, sweet moments,
+                        and aesthetic things.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="video-section">
+    <div class="video-box reveal">
+        <h2>My Video</h2>
+        <p>
+            This video is part of my About Me page and represents one of my favourite moments.
+        </p>
+
+        <div class="video-wrapper">
+            <div class="youtube-video">
+                <iframe
+                    src="https://www.youtube.com/embed/AqtGx71Zxgs?rel=0"
+                    title="About Me Video"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <p class="video-caption">
+                About Me Video
+            </p>
+        </div>
+    </div>
+</section>
+<section class="quote-section">
+    <div class="quote-card reveal">
+        <h2>Dream • Create • Inspire</h2>
+        <p>
+            Life is full of beautiful memories. Every small moment can become
+            something special when we appreciate it with a grateful heart.
+        </p>
+    </div>
+</section>
+
+<footer>
+    © 2026 Nursyahira | About Me Page
+</footer>
+
+<script>
+
+window.addEventListener("load", function(){
+    const loader = document.getElementById("loader");
+    setTimeout(function(){
+        loader.classList.add("hide");
+    }, 900);
+});
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic(){
+    if(music.paused){
+        music.play().then(function(){
+            musicBtn.innerHTML = "⏸️";
+            musicBtn.title = "Pause Music";
+        }).catch(function(){
+            musicBtn.innerHTML = "🎵";
+        });
+    }else{
+        music.pause();
+        musicBtn.innerHTML = "🎵";
+        musicBtn.title = "Play Music";
+    }
+}
+
+window.addEventListener("scroll", function(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById("progressBar").style.width = progress + "%";
+});
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll(){
+    reveals.forEach(function(item){
+        const windowHeight = window.innerHeight;
+        const elementTop = item.getBoundingClientRect().top;
+        const revealPoint = 120;
+
+        if(elementTop < windowHeight - revealPoint){
+            item.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>
